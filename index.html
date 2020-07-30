@@ -78,6 +78,7 @@
               const resp = await axios.get(url)
               this.setResults(resp.data)
             } catch (error) {
+              debugger
               this.setError(error.message);
             }
           }
