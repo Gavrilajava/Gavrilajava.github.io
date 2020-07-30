@@ -73,7 +73,7 @@
           async run() {
             console.log(new Date().toISOString(), '[Test]', 'Running the test');
             // Make the API call and handle the results
-            const url = `http://api.openweathermap.org/data/2.5/weather?lat=${this.coords.lat}&lon=${this.coords.lon}&appid=25e989bd41e3e24ce13173d8126e0fd6`
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.coords.lat}&lon=${this.coords.lon}&appid=25e989bd41e3e24ce13173d8126e0fd6`
             try{
               const resp = await axios.get(url)
               this.setResults(resp.data)
