@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-06-24T18:03:11+00:00">
+    <title>Pragmatic intro to React part 1 — Basics</title>
+</head>
+<body>
+    <div class="story">
+      Sooner or later everyone who starts writing code in Javascript faces the need to use functions that return promises. The simplest example of this need is a request from a third party API. If we execute such a request synchronously, no other code will be executed until we receive a response from the server and the site will simply “hang”. This may be unnoticeable for a small “todo-list”, but is completely unacceptable for a large application.
+Prior to the appearance of “promises”, asynchronous tasks could be solved with the help of callback functions or event processing. A universal approach to solving asynchronous tasks is event processing. Less convenient, but also having the right to exist, way to use callback functions. Of course, the choice of solution depends on the task before you. The variant of solving problems with the help of “promises” is rather intended to replace the approach to callback functions.
+There is a significant disadvantage in using callback functions in terms of code organization: “callback hell”. This drawback is that there is a parameter in the callback function, which in turn is also a callback function — and so can go on forever.
+The Promise interface is a wrapper for a value unknown at the time of promise creation. It allows to process the results of asynchronous operations as if they were synchronous: instead of the final result of the asynchronous method, the promise is returned, the result of which can be obtained at some point in the future. At creation, the promise is waiting (pending state) and then can be fulfilled by returning the result (value) or rejected by returning the reason for rejection.
+The Promise object is created using the new Promise(…) constructor, to which an anonymous function with two parameters is passed as an argument: resolve and reject. These, in turn, are also functions. Resolve() — reports that the code was executed “successfully”, reject() — the code was executed with a “bug” (what to consider an “error” when executing your code is up to you. This is something like if(true){…} else {…}). Any objects can be passed to resolve() and reject() methods. The reject() method is usually passed to an Error object with the reason for the error (“rejected” state of “promise”). In any case, this is not necessary. The solution as to how you will handle such situations is up to you.
+Whenever you create a Promise object, two methods are available: then() and catch(). Using them, you can execute the desired code if the “promise” (resolve(…)) is successfully resolved or the code that handles the “error” situation (reject(…)). The then() and catch() methods pass two anonymous functions. The syntax of the then() method is generally the same:
+Image for post
+The function onSuccess(){} parameter will be called if the “promise” is successfully executed, the function onFail() {} — if it is an error. It is much more usual and understandable to use catch(…). You can also call the catch() method “in the middle” of a chain of calls then() if the logic of your code requires it: then().catch().then(). Remember to call catch() last in the chain: this will allow you to always catch “erroneous” situations.
+The result will be a request to the API using the promises as shown below. Note that in each block then I check the result for errors, because for example code 404 is also a result.
+    </div>
+</body>
+</html>
