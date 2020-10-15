@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-07-21T16:47:32+00:00">
+    <title>Deploying your app to Heroku</title>
+</head>
+<body>
+    <div class="story">
+      Earlier I told you how to deploy your application on Rails to a dedicated server. However, there is a simpler way to introduce the world to your creations. I am talking about Heroku now. Today I will talk about how to quickly and easily lock your application on it. The first thing you will need to register on Heroku. After you confirm your e-mail, you will need to fill in some more data in your profile. In general, nothing complicated, nothing unusual.
+Next, you need to install the command-line software from Heroku on your computer, if you have not already done so. For Ubuntu and Debian the installation process is to execute the following command:
+user@host:~/rails/myapp$ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+For the other Linux distributions, this one:
+user@host:~/rails/myapp$ wget -qO- https://toolbelt.heroku.com/install.sh | sh
+Frankly speaking, I don’t know if these scripts are any different. Windows and OS X users can download the installation files here.
+Login to profile from the command line
+Once all the necessary tools are installed, you need to login to Heroku from the command line:
+user@host:~/rails/myapp$ heroku login
+Enter your Heroku credentials.
+Email: user@example.com
+Password:
+Could not find an existing public key.
+Would you like to generate one? [Yn]
+Generating new SSH public key.
+Uploading ssh public key /home/user/.ssh/id_rsa.pub
+If you have not yet generated a public key for SSH, you will be prompted to do so.
+Initializing the git repository
+If you don’t use a version control system or if you do, but don’t use git, you’ll have to create a local git repository on your work computer because Heroku only supports this version control system. It is very simple:
+user@host:~/rails/myapp$ git init && git commit -am “init”
+Some specific
+For your web application to work correctly, you need to add rails_12factor to your Gemfile (if you use Rails 4) and specify the ruby version there (for all Rails versions):
+gem “rails_12factor”, group: :production
+#
+# Your other gems
+#
+# The version of Ruby should be specified at the end of the file
+ruby “2.1.2”
+Please note that you must use the same version of Ruby as yours.
+If you use a web server other than WEBrick (Thin in my case), which, by the way, is recommended by the Heroku service itself, then you will need to create the same Procfile approximately the following content:
+web: bundle exec thin start -p $PORT
+Last but not the least
+Our work on the launch of web-application has almost come to an end, there are the final touches. Then it will be assumed that you use PostgreSQL as a DBMS. If you are using MySQL — a little bit below I told you how to befriend this DBMS with Heroku. So, let’s create an application in Heroku:
+user@host:~/rails/myapp$ heroku create myapp
+Creating myapp… done, stack is cedar
+http://myapp.herokuapp.com/ | git@heroku.com:myapp.git
+Git remote heroku added
+Generally speaking, you may not need to specify the name of the application when creating it, then Heroku will make up something like deep-sea-69.
+Now your application is available at myapp.herokuapp.com, but there is nothing there yet. To fix this, you need to run your application on the Heroku server:
+user@host:~/rails/myapp$ git push heroku master
+You may need to make the asset precompile to make everything work properly (personally I had to, if someone tells me how to get Heroku to do everything automatically — I would be grateful):
+user@host:~/rails/myapp$ rake assets:precompile RAILS_ENV=production
+After that, perform all migrations…
+user@host:~/rails/myapp$ heroku run rake db:migrate
+…and you can see what you have done:
+user@host:~/rails/myapp$ heroku open
+Connecting Heroku and MySQL
+It so happens that for Rails more traditional is PostgreSQL, this DBMS is also “native” to Heroku. But it may happen that you use another popular DBMS — MySQL. Then, for your application to work correctly, you need to make a few more motions. Don’t worry, they are quite simple!
+To achieve our goal, we will use the ClearDB add-on. We will install it and get data about the database allocated to us:
+user@host:~/rails/myapp$ heroku addons:add cleardb:ignite
+— — -> Adding cleardb to sharp-mountain-4005… done, v18 (free)
+user@host:~/rails/myapp$ heroku config | grep CLEARDB_DATABASE_URL
+CLEARDB_DATABASE_URL => mysql://adffdadf2341:adf4234@us-cdbr-east.cleardb.com/heroku_db?reconnect=true
+Next, just set the obtained address as DATABASE_URL in Heroku, changing the protocol to mysql2 if necessary:
+user@host:~/rails/myapp$ heroku config:set DATABASE_URL=’mysql2://adffdadf2341:adf4234@us-cdbr-east.cleardb.com/heroku_db?reconnect=true’
+That’s all!
+      </div>
+</body>
+</html>

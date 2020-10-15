@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-07-14T13:12:05+00:00">
+    <title>Advantage of React Hooks using UseContext() as an example</title>
+</head>
+<body>
+    <div class="story">
+      If you haven’t already heard, the React Hooks are opening up a whole new way of writing components. Of course, this is a major change, but do we really need the hooks at the same time? In this article I will try to answer a simpler question: are there situations in which the hooks are obviously better? My answer is yes and I think you will agree that the hooks improve readability when I show an example of usingContext.
+Since the creation of React, one of the least enjoyable things has been the transfer of data through multiple layers in the component tree. In the beginning, this could only be done manually bypassing props through each level from parent to child component (so-called prop drilling). Obviously, this was cumbersome and the React team gave us an experimental Context API to work with before they released the official version of Context API. But the fact is that even the official version has its own specifics.
+After receiving data from Context, you will usually want to use this data within the rendering function, as in the example below:
+Image for post
+In this example, we only pass one variable. And frankly, the code looks fine. It’s easy to understand the logic, but imagine for a second that you want to pass three Context objects:
+Image for post
+Although the second example works, it starts to look cumbersome. As you can see, a pyramid of flasks starts to form — the more contexts you use, the worse it gets. Unless you are using the useContext hook.
+useContext()
+Since React 16.8, you can use useContext(): a new, easy way to use data from multiple contexts. Here is how you can simplify the example above:
+Image for post
+Much better, isn’t it? Now take a look at the examples above and imagine that the Context API had to be used for years before the hook appeared. Can you imagine? Great! Now answer the question: Which way is more readable? I think the second one is obvious. The Hooks have brought many changes to the code. How much will they be in demand? Time will tell. In the meantime we can only say with certainty: it is better to use hooks for the context.
+    </div>
+</body>
+</html>
