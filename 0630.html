@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-06-30T20:15:06+00:00">
+    <title>Promises</title>
+</head>
+<body>
+    <div class="story">
+      MongoDB implements a new approach to database construction, where there are no tables, schemes, SQL queries, external keys, and many other things that are inherent in object-relational databases.
+      Since dinosaurs, it has been common to store all data in relational databases (MS SQL, MySQL, Oracle, PostgresSQL). It was not so important whether relational databases were suitable for storing this type of data or not.
+      In contrast to the relational databases, MongoDB offers a document-oriented data model, due to which MongoDB works faster, has better scalability, it is easier to use.
+      But, even considering all the shortcomings of traditional databases and the advantages of MongoDB, it is important to understand that the tasks are different and the methods of their solution are different. In some situations MongoDB will really improve the performance of your application, for example, if you need to store complex data. In another situation, it is better to use traditional relational databases. In addition, you can use a mixed approach: to store one type of data in MongoDB, and another type of data — in traditional databases.
+      The whole MongoDB system may represent not only one database located on one physical server. The MongoDB functionality allows us to place several databases on several physical servers, and these databases can easily exchange data and maintain integrity.
+      Data format in MongoDB
+      One of the popular standards for data exchange and storage is JSON (JavaScript Object Notation). JSON effectively describes data that are complex in structure. The way data is stored in MongoDB is similar to JSON in this respect, although formally JSON is not used. MongoDB stores data in a format called BSON or short for binary JSON.
+      BSON allows you to work with your data faster: faster search and processing. Although it should be noted that BSON, as opposed to storing data in the JSON format, has a small disadvantage: in general, data in the JSON-format takes up less space than in the BSON-format, on the other hand, this disadvantage is more than compensated for speed.
+      Documents instead of rows
+      If relational databases store strings, then MongoDB stores documents. In contrast to strings, documents may store information that is complex in structure. A document may be represented as storage of keys and values.
+      A key represents a simple label, with which a certain piece of data is associated. However, with all the differences, there is one feature that brings together MongoDB and relational databases. In relational DBMS there is such a concept as a primary key. This concept describes a certain column that has unique values. In MongoDB for each document, there is a unique identifier, which is called _id. And if you do not explicitly specify its value, MongoDB will automatically generate a value for it.
+      A certain value is compared to each key. But here we should also take into account one peculiarity: if there is a clearly defined structure in relational databases, where there are fields, and if some field has no value, it can be assigned a value of NULL (depending on the settings of a particular database). In MongoDB everything is different. If some key is not matched by value, this key is simply omitted from the document and is not used.
+      Collections
+      If in the traditional SQL world there are tables, in the MongoDB world there are collections. And if in relational databases tables store the same type of rigidly structured objects, then the collections may contain a variety of objects with different structures and different sets of properties.
+      Replication.
+      The data storage system in MongoDB represents a set of replicas. In this set, there is the main node, and may also be a set of secondary nodes. All secondary nodes preserve the integrity and are automatically updated together with the main node update. And if the main node fails for some reason, one of the secondary nodes becomes the main node.
+      Easy to use
+      The absence of a rigid database schema and, therefore, the need for the slightest change in the concept of data storage to recreate this scheme greatly facilitates the work with MongoDB databases and their further scaling. In addition, developers’ time is saved. They no longer need to think about recreating the database and spend time on building complex queries.
+      GridFS
+      One of the problems when working with any database systems is saving a large data size. You can save data in files using different programming languages. Some DBMS offer special data types for storing binary data in the database (for example, BLOB in MySQL).
+      In contrast to relational DBMS, MongoDB allows you to save various documents with different data sets, but the size of the document is limited to 16 MB. But MongoDB offers a solution — a special technology GridFS, which allows you to store data size greater than 16 MB.
+      The GridFS system consists of two collections. The first collection, called files, stores the names of files as well as their metadata, such as size. The other collection called chunks, stores file data in small segments, usually in 256 kb segments.
+      This was the theoretical part, practical implementation will follow.
+    </div>
+</body>
+</html>
