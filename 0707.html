@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-07-07T19:22:13+00:00">
+    <title>UseState(), Redux or UseReducer()?</title>
+</head>
+<body>
+    <div class="story">
+      The use of libraries to control the state of such as Redux is a common practice when creating React applications. While for large applications this is really justified and convenient, using a third-party library to transfer state between two components may not seem appropriate. Fortunately, React has a built-in alternative called useReducer().
+useReducer() is a method from the React Hooks API, similar to useState() but giving more control over state management. It takes the reducer function and the initial state as arguments, and returns the state and the dispatch method:
+Reducer (so-called because of the type of function which is passed to the array method — Array.prototype.reduce(reducer, initialValue)) is a template taken from Redux. If you are not familiar with Redux, in short, the reducer is a function that takes the previous state and action as arguments and returns the next state. The actions are a piece of information that describes what will happen. And based on this information, the reducer defines how the state should change. Actions are passed through dispatch(action) method.
+Most of the time you’ll be fine with just usingState(), which is based on useReducer(). But there are cases where it is still preferable to useReducer().
+The following state depends on the previous
+It is better to use this method when the next state depends on the previous one. This will give predictability in the state change. Here is a simple example:
+Image for post
+Complex states
+When a state consists not of primitive values but of a nested array or object. This state is easier to manage because the parameters depend on each other and the whole logic can be placed in one reducer. For example:
+Image for post
+Easy testing
+Reducers are pure functions, so they have no side effects. They return the same value if you set the same arguments. It is easier to test them because they do not depend on React. Let’s take the editor from the example with the counter and test it:
+Image for post
+useReducer() is something between useState() and Redux that gives more control over state management and simplifies testing, but at the same time uses only the built-in libraries. All examples can also be implemented with useState(), so in conclusion, use the method that is more convenient for you.
+    </div>
+</body>
+</html>
