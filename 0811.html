@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-08-11T16:25:12+00:00">
+    <title>ESLint — simple way to keep your code clean</title>
+</head>
+<body>
+    <div class="story">
+      As a Javascript developer, sooner or later you will think about bringing your code to a single standard. And this is the right decision. You shouldn’t think for a second that it might be a mistake. A single style of code helps to solve tons of small problems that haunt all developers. One of the strengths of JS is the available tools. Not every language can boast such a large ecosystem of libraries and tools. One of these tools is used for static code analysis and is called ESLint.
+ESLint is a linter for a JavaScript programming language written in Node.js. It is extremely useful because JavaScript, being an interpretive language, has no compile time and many errors can only be detected at runtime.
+ESLint will help you:
+find existing errors in the code;
+avoid stupid mistakes;
+avoid endless loops in the for loop conditions;
+make sure that all getter methods return something;
+do not allow the console.log expression (and similar);
+check for duplicates of cases in the switch;
+check for code that is not available;
+check if the JSDoc is correct;
+ESLint is very flexible and customizable and you can choose which rules to use or which style to apply. Many of the available rules are disabled, but you can include them in your .eslintrc configuration file, which can be global or local for your project.
+Installing ESLint globally
+Using npm:
+npm install -g eslint
+# create a `.eslintrc` configuration file
+eslint — init
+# starts ESLint checking the specified file
+eslint yourfile.js
+Install ESLint locally:
+npm install eslint — save-dev
+# creates a `.eslintrc` configuration file
+./node_modules/.bin/eslint — init
+# starts ESLint checking the specified file
+./node_modules/.bin/eslint yourfile.js
+Setting Airbnb Styles
+One of the most popular settings for the linker is Airbnb JavaScript Style.
+Use the command:
+yarn add — dev eslint-config-airbnb
+or:
+npm install — save-dev eslint-config-airbnb
+to install the Airbnb configuration package and add to your .eslintrc file which is in the root of your project:
+// .eslintrc
+{
+“extends”: “airbnb”
+}
+Setting styles for React
+You can easily connect a linter to React using the React plugin:
+yarn add — dev eslint-plugin-react
+or :
+npm install — save-dev eslint-plugin-react
+and adding .eslintrc to your file:
+// .eslintrc
+{
+  “extends”: “airbnb”,
+  “plugins”: [“react”],
+  “parserOptions”: {
+    “ecmaFeatures”: {
+      “jsx”: true
+     }
+  }
+}
+Use specific versions of EcmaScript
+ECMAScript changes its version every year.
+The default version is version 5, which means the standard until 2015.
+To enable ES6 (or higher), write it in .eslintrc
+// .eslintrc
+{
+  “parserOptions”: {
+    “ecmaVersion”: 6
+  }
+}
+More rules
+Detailed rules manual can be found on the official website https://eslint.org/docs/user-guide/configuring.
+Disabling rules where necessary
+Sometimes you may need to disable rules in a particular place, you can do so:
+/* eslint-disable */
+alert (“test”);
+/* eslint-enable */
+or .
+alert(“test”); // eslint-disable-line
+You can also disable one or more specific rules for several lines:
+/* eslint-disable no-alert, no-console */
+alert (“test”);
+console.log(“test”);
+/* eslint-enable no-alert, no-console */
+or for one line:
+alert(“test”); // eslint-disable-line no-alert, quotes, semi
+Although over time you will avoid many of the errors that ESLint points out, the time you can spend on correct indents and calculating the number of spaces can be spent on something more important.
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta property="article:published_time" content="2020-08-18T12:11:17+00:00">
+    <title>Smart and Dumb Components</title>
+</head>
+<body>
+    <div class="story">
+      When you start to create any more or less functional application for React, after a while you get a certain number of components. If you are just as prone to order as I am, you’ll want to organize them somehow, like dividing them into groups. If you didn’t follow any paradigm when you created them, you may have difficulties with this. So I want to tell you about the division of components into containers and presentation, or what else they are called smart and dumb.
+There are several advantages to this approach at once. First, you divide your application into two layers. One is responsible for logic, the other for the representation. Such almost MVC only without models, we have here all the same front end. The second stupid or presentation component in this case it is easier to reuse. And thirdly, it greatly simplifies testing and redesign. With testing, everything is clear and so, and redesign is simplified by the fact that all components can be displayed on one page.
+I have read a lot of articles on this topic, and I have come up with the following rules, which I try to follow. So let’s start with dumb or presentational components. They are:
+Independent of the rest of the application. This means that they do not use Redux Store, Context, or other libraries to transfer data between components. All the data they need, they receive through the props.
+Often contained in props.children. It is better to be described by the code:
+
+Use its own css file. This is quite convenient for several reasons. First, you don’t need to upload a shared file of ten thousand lines to draw a button. The second, lines responsible for the button is easier to find and change.
+They can have their own state. For example controlled forms.
+May use other dumb components. Or be a container for smart-ones.
+Now let’s formulate rules for smart components. Although I prefer to call them containers. So they are:
+Wrap around one or more dumb components. It is obvious. We wrap the component that shows something in the component that performs the calculations and queries and passes the data to it.
+Stores state or communicate with libraries as Redux. I assume an exception to this rule, e.g. for controlled forms I don’t see any point in flipping an intermediate form state between components.
+Calls and transmits as a callbacks Redux actions. If you need to change the state of the stock with a button, you transfer the stock from Redux first to a smart component, then if you need to wrap it in your function and transfer it to a stupid component as a prop.
+They never render anything in DOM and therefore don’t have their own styles. There are presentation components for that.
+These are simple rules that I have formulated for myself and I try to follow them. This paradigm should not be overestimated too much; it is needed only for convenience. Dan Abramov, who invented it a year after his article, wrote the following tweet.
+
+    </div>
+</body>
+</html>
